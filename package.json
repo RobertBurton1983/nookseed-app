@@ -1,1 +1,10 @@
-{"name:"nookseed","version":"1.0.0"
+{
+  "name": "nookseed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nookseed — a field guide for curiosity, with a $9 one-time unlock for real local hobby matches.",
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}
+
