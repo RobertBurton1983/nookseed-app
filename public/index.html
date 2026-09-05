@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nookseed — a field guide for curiosity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #ECE6D4;
+    --paper-warm: #E4DCC4;
+    --card: #F8F4E6;
+    --ink: #262B1F;
+    --ink-soft: #565B49;
+    --moss: #445533;
+    --moss-deep: #313F26;
+    --rust: #AE5330;
+    --gold: #BE8F34;
+    --line: rgba(38,43,31,0.16);
+    --line-strong: rgba(38,43,31,0.35);
+    --shadow: 0 1px 0 rgba(38,43,31,0.06);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--gold); color:var(--moss-deep); }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:2000;
+    opacity:0.5;
+    mix-blend-mode:multiply;
+    background-image:
+      radial-gradient(rgba(38,43,31,0.045) 0.6px, transparent 0.6px);
+    background-size: 3px 3px;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{ animation: rise 0.7s ease both; }
+    @keyframes rise{
+      from{ opacity:0; transform:translateY(14px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+  }
+
+  a{ color:inherit; }
+  button{ font-family:inherit; }
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .label{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.02em;
+    color:var(--ink-soft);
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(236,230,212,0.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .wordmark{
+    display:flex; align-items:center; gap:9px;
+    font-family:'Fraunces', serif;
+    font-size:21px;
+    font-weight:600;
+    text-decoration:none;
+    color:var(--moss-deep);
+  }
+  .wordmark svg{ width:26px; height:26px; flex:none; }
+  .nav-links{ display:flex; align-items:center; gap:28px; }
+  .nav-links a{
+    text-decoration:none;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{
+    border:1px solid var(--line-strong);
+    padding:9px 17px;
+    border-radius:3px;
+    font-size:14px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .nav-cta:hover{ background:var(--card); border-color:var(--moss); }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:88px 0 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow-row{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:26px;
+    color:var(--moss);
+  }
+  .eyebrow-row .rule{ width:34px; height:1px; background:var(--moss); display:inline-block; }
+  .eyebrow-row span{ font-family:'Space Mono',monospace; font-size:12.5px; letter-spacing:0.03em; }
+
+  h1.hero-head{
+    font-size:clamp(38px, 5.4vw, 62px);
+    line-height:1.04;
+    color:var(--moss-deep);
+    max-width:14ch;
+  }
+  h1.hero-head em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--rust);
+  }
+  .hero-sub{
+    margin:22px 0 0;
+    font-size:17.5px;
+    line-height:1.55;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .hero-actions{
+    margin-top:34px;
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--moss-deep);
+    color:var(--paper);
+    border:none;
+    padding:15px 26px;
+    border-radius:3px;
+    font-size:15.5px;
+    font-weight:500;
+    cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary:hover{ background:var(--moss); }
+  .btn-primary:active{ transform:scale(0.98); }
+  .hero-hint{
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+
+  .signal-row{
+    margin-top:46px;
+    display:flex; gap:0;
+    border-top:1px solid var(--line);
+  }
+  .signal{
+    flex:1;
+    padding:18px 18px 0 0;
+    border-right:1px solid var(--line);
+  }
+  .signal:last-child{ border-right:none; }
+  .signal .num{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:var(--gold);
+  }
+  .signal p{
+    margin:8px 0 0;
+    font-size:14.5px;
+    color:var(--ink);
+    line-height:1.35;
+  }
+
+  /* seed packet illustration */
+  .packet{
+    position:relative;
+    aspect-ratio: 3/4;
+    max-width:340px;
+    margin:0 auto;
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    border-radius:2px;
+    box-shadow: 6px 6px 0 rgba(38,43,31,0.07);
+    padding:22px;
+    display:flex; flex-direction:column;
+  }
+  .packet-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    border-bottom:1px dashed var(--line-strong);
+    padding-bottom:12px;
+  }
+  .packet-top .label{ color:var(--moss); }
+  .packet-illustration{ flex:1; display:flex; align-items:center; justify-content:center; }
+  .packet-illustration svg{ width:78%; height:auto; }
+  .packet-foot{
+    border-top:1px dashed var(--line-strong);
+    padding-top:12px;
+  }
+  .packet-foot .name{ font-family:'Fraunces',serif; font-size:19px; color:var(--moss-deep); }
+  .packet-foot .lat{ font-family:'Space Mono',monospace; font-size:11px; color:var(--ink-soft); font-style:italic; }
+
+  /* ---------- SECTIONS shared ---------- */
+  section{ padding:90px 0; }
+  .section-head{ max-width:640px; margin-bottom:52px; }
+  .section-head .label{ color:var(--rust); margin-bottom:12px; display:block; }
+  .section-head h2{ font-size:clamp(28px,3.4vw,40px); color:var(--moss-deep); line-height:1.12; }
+  .section-head p{ margin-top:14px; font-size:16px; color:var(--ink-soft); line-height:1.5; max-width:52ch; }
+
+  /* ---------- METHOD ---------- */
+  .method{ background:var(--paper-warm); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .method-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    border-top:1px solid var(--line-strong);
+  }
+  .method-item{
+    padding:30px 26px 0 0;
+    border-right:1px solid var(--line);
+  }
+  .method-item:last-child{ border-right:none; }
+  .method-item .num{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:34px;
+    color:var(--gold);
+    display:block;
+  }
+  .method-item h3{ font-size:19px; margin-top:10px; color:var(--moss-deep); }
+  .method-item p{ margin-top:8px; font-size:14.5px; color:var(--ink-soft); line-height:1.5; }
+
+  /* ---------- QUIZ TEASER / LAUNCH ---------- */
+  .detour{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap:0;
+    border:1px solid var(--line-strong);
+    background:var(--card);
+  }
+  .detour-left{
+    padding:44px;
+    border-right:1px solid var(--line-strong);
+    display:flex; flex-direction:column; justify-content:center;
+    background: repeating-linear-gradient(135deg, rgba(68,85,51,0.035) 0 2px, transparent 2px 14px);
+  }
+  .detour-left .label{ color:var(--moss); margin-bottom:10px; }
+  .detour-left h3{ font-size:27px; color:var(--moss-deep); line-height:1.2; }
+  .detour-left p{ margin-top:12px; font-size:15px; color:var(--ink-soft); line-height:1.5; }
+  .detour-right{ padding:44px; display:flex; flex-direction:column; justify-content:center; }
+  .detour-right p{ font-size:14.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 22px; }
+  .detour-note{ margin-top:18px; font-size:12.5px; color:var(--ink-soft); }
+  .detour-note svg{ width:13px; height:13px; vertical-align:-2px; margin-right:6px; }
+
+  /* ---------- QUIZ ---------- */
+  #quiz{ display:none; padding:70px 0 100px; }
+  #quiz.active{ display:block; }
+  .quiz-frame{
+    max-width:640px;
+    margin:0 auto;
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    box-shadow: 8px 8px 0 rgba(38,43,31,0.06);
+  }
+  .quiz-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 30px;
+    border-bottom:1px solid var(--line);
+  }
+  .quiz-progress{ display:flex; gap:6px; }
+  .dot{ width:22px; height:3px; background:var(--line-strong); }
+  .dot.on{ background:var(--rust); }
+  .quiz-close{
+    background:none; border:none; cursor:pointer; color:var(--ink-soft);
+    font-family:'Space Mono',monospace; font-size:12px;
+  }
+  .quiz-close:hover{ color:var(--ink); }
+  .quiz-body{ padding:44px 40px 34px; min-height:280px; }
+  .step{ display:none; }
+  .step.active{ display:block; animation: rise 0.4s ease both; }
+  .step .label{ color:var(--gold); margin-bottom:10px; display:block; }
+  .step h3{ font-size:25px; color:var(--moss-deep); line-height:1.25; margin-bottom:8px; }
+  .step .helper{ font-size:14px; color:var(--ink-soft); margin-bottom:22px; }
+
+  textarea, input[type=text]{
+    width:100%;
+    font-family:'Work Sans',sans-serif;
+    font-size:15.5px;
+    padding:14px 16px;
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    border-radius:2px;
+    color:var(--ink);
+    resize:vertical;
+  }
+  textarea:focus, input[type=text]:focus{
+    outline:2px solid var(--moss);
+    outline-offset:1px;
+  }
+
+  .choice-grid{ display:grid; gap:10px; }
+  .choice-grid.cols-2{ grid-template-columns:1fr 1fr; }
+  .choice{
+    text-align:left;
+    padding:14px 16px;
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    border-radius:2px;
+    cursor:pointer;
+    font-size:15px;
+    color:var(--ink);
+    transition:border-color .12s ease, background .12s ease;
+  }
+  .choice small{ display:block; font-size:12.5px; color:var(--ink-soft); margin-top:3px; font-weight:400; }
+  .choice:hover{ border-color:var(--moss); }
+  .choice.selected{
+    background:var(--moss-deep);
+    border-color:var(--moss-deep);
+    color:var(--paper);
+  }
+  .choice.selected small{ color:rgba(236,230,212,0.75); }
+
+  .quiz-foot{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 40px 30px;
+  }
+  .btn-ghost{
+    background:none;
+    border:1px solid var(--line-strong);
+    padding:12px 20px;
+    border-radius:3px;
+    cursor:pointer;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  .btn-ghost:hover{ border-color:var(--moss); }
+  .btn-ghost:disabled{ opacity:0.35; cursor:not-allowed; }
+  .btn-primary.small{ padding:12px 22px; font-size:14.5px; }
+  .btn-primary:disabled{ opacity:0.4; cursor:not-allowed; }
+
+  /* ---------- RESULTS ---------- */
+  #results{ display:none; padding:20px 0 110px; }
+  #results.active{ display:block; }
+  .results-head{ max-width:640px; margin-bottom:16px; }
+  .results-head .label{ color:var(--rust); }
+  .results-head h2{ font-size:clamp(28px,3.6vw,42px); color:var(--moss-deep); margin-top:12px; line-height:1.12; }
+  .results-brief{
+    margin-top:16px; font-size:15px; color:var(--ink-soft); line-height:1.6;
+    padding:14px 18px; border-left:2px solid var(--gold); background:var(--paper-warm);
+    max-width:560px;
+  }
+  .results-brief b{ color:var(--ink); font-weight:600; }
+
+  .cards{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .seedcard{
+    background:var(--card);
+    border:1px solid var(--line-strong);
+    display:flex; flex-direction:column;
+    box-shadow: 5px 5px 0 rgba(38,43,31,0.06);
+  }
+  .seedcard-top{
+    padding:20px 20px 16px;
+    border-bottom:1px dashed var(--line-strong);
+  }
+  .seedcard-top .idx{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--gold); }
+  .seedcard-top h3{ font-size:23px; color:var(--moss-deep); margin-top:8px; line-height:1.18; }
+  .seedcard-top .lat{ font-family:'Fraunces',serif; font-style:italic; font-size:13px; color:var(--ink-soft); margin-top:4px; }
+  .seedcard-body{ padding:18px 20px; flex:1; }
+  .seedcard-body p{ font-size:14.5px; color:var(--ink-soft); line-height:1.55; margin:0 0 16px; }
+  .seedcard-body .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+  .tag{
+    font-family:'Space Mono',monospace; font-size:11px; color:var(--moss);
+    border:1px solid var(--moss); padding:3px 8px; border-radius:20px;
+  }
+  .steps-title{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft); letter-spacing:0.02em; margin-bottom:10px; }
+  .steps-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .steps-list li{
+    font-size:13.5px; color:var(--ink); line-height:1.4;
+    padding-left:20px; position:relative;
+  }
+  .steps-list li::before{
+    content:"→"; position:absolute; left:0; color:var(--rust);
+  }
+  .seedcard-foot{
+    padding:16px 20px; border-top:1px solid var(--line);
+  }
+
+  .results-actions{
+    margin-top:40px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+  }
+
+  .unlock-panel{
+    margin-top:28px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    background:var(--moss-deep);
+    color:var(--paper);
+    padding:26px 30px;
+    border-radius:2px;
+  }
+  .unlock-panel h3{ font-size:20px; color:var(--paper); margin-top:6px; line-height:1.25; }
+  .unlock-panel p{ margin-top:8px; font-size:14px; color:rgba(236,230,212,0.78); max-width:44ch; }
+  .unlock-panel .btn-primary{ background:var(--gold); color:var(--moss-deep); flex:none; }
+  .unlock-panel .btn-primary:hover{ background:#d3a648; }
+  .unlock-panel.unlocked{ background:var(--paper-warm); color:var(--ink); border:1px solid var(--line-strong); }
+  .unlock-panel.unlocked h3{ color:var(--moss-deep); }
+  .unlock-panel.unlocked p{ color:var(--ink-soft); }
+
+  .local-block{ margin-top:4px; }
+  .local-title{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft); margin-bottom:10px; }
+  .local-place{
+    display:block; padding:10px 0; border-top:1px solid var(--line);
+    font-size:13.5px; line-height:1.4;
+  }
+  .local-place:first-child{ border-top:none; }
+  .local-place .pname{ color:var(--ink); font-weight:500; }
+  .local-place .paddr{ color:var(--ink-soft); font-size:12.5px; display:block; margin-top:2px; }
+  .local-place .prating{ color:var(--gold); font-size:12px; }
+  .local-empty{ font-size:13px; color:var(--ink-soft); font-style:italic; }
+  .local-locked{ font-size:13px; color:var(--ink-soft); }
+  .link-btn{
+    background:none; border:none; cursor:pointer; color:var(--moss-deep);
+    font-size:14.5px; text-decoration:underline; padding:0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line-strong);
+    padding:40px 0;
+  }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  footer .wordmark{ font-size:16px; }
+  footer .fine{ font-size:13px; color:var(--ink-soft); }
+
+  @media (max-width:860px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .packet{ margin-top:20px; max-width:280px; }
+    .method-list{ grid-template-columns:1fr; }
+    .method-item{ border-right:none; border-bottom:1px solid var(--line); padding-bottom:24px; margin-bottom:24px; }
+    .detour{ grid-template-columns:1fr; }
+    .detour-left{ border-right:none; border-bottom:1px solid var(--line-strong); }
+    .cards{ grid-template-columns:1fr; }
+    .choice-grid.cols-2{ grid-template-columns:1fr; }
+    .signal-row{ flex-direction:column; }
+    .signal{ border-right:none; border-bottom:1px solid var(--line); padding-bottom:16px; margin-bottom:8px; }
+    .nav-links{ gap:16px; }
+    .quiz-body{ padding:34px 24px 24px; }
+    .quiz-foot{ padding:18px 24px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="wordmark">
+      <svg viewBox="0 0 26 26" fill="none"><path d="M13 24C13 24 5 19 5 11.5C5 7 8 3 13 3C18 3 21 7 21 11.5C21 19 13 24 13 24Z" stroke="currentColor" stroke-width="1.4"/><path d="M13 24V10" stroke="currentColor" stroke-width="1.4"/><path d="M13 13C13 13 10 10.5 10 8" stroke="currentColor" stroke-width="1.2"/></svg>
+      Nookseed
+    </a>
+    <div class="nav-links">
+      <a href="#method">Method</a>
+      <a href="#quiz-teaser">Get started</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="nav-cta">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-row"><span class="rule"></span><span>A FIELD GUIDE FOR CURIOSITY</span></div>
+      <h1 class="hero-head">Meet your next <em>Nookseed.</em></h1>
+      <p class="hero-sub">Find a pastime that fits your next chapter — personalized to your interests, your pocket, your place, and the way you like to spend a good hour.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="startQuiz()">Plant your next hobby</button>
+        <span class="hero-hint">Two minutes. No account.</span>
+      </div>
+      <div class="signal-row">
+        <div class="signal"><span class="num">01</span><p>The time you actually have</p></div>
+        <div class="signal"><span class="num">02</span><p>What is close enough to try</p></div>
+        <div class="signal"><span class="num">03</span><p>Your ideal kind of company</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="packet">
+        <div class="packet-top">
+          <span class="label">SPECIMEN NO. 014</span>
+          <span class="label">UNSOWN</span>
+        </div>
+        <div class="packet-illustration">
+          <svg viewBox="0 0 160 160" fill="none">
+            <ellipse cx="80" cy="140" rx="46" ry="6" fill="rgba(38,43,31,0.06)"/>
+            <path d="M80 140V78" stroke="#445533" stroke-width="2"/>
+            <path d="M80 100C80 100 58 96 54 76C54 76 78 74 80 100Z" fill="#BE8F34" fill-opacity="0.18" stroke="#445533" stroke-width="1.3"/>
+            <path d="M80 88C80 88 102 82 104 62C104 62 80 62 80 88Z" fill="#AE5330" fill-opacity="0.16" stroke="#445533" stroke-width="1.3"/>
+            <circle cx="80" cy="58" r="20" fill="#F8F4E6" stroke="#AE5330" stroke-width="1.6"/>
+            <circle cx="80" cy="58" r="4" fill="#AE5330"/>
+            <path d="M80 46V38M80 78V70M68 58H60M100 58H92M71.5 49.5L66 44M88.5 49.5L94 44M71.5 66.5L66 72M88.5 66.5L94 72" stroke="#AE5330" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="packet-foot">
+          <div class="name">Something waiting to be tried</div>
+          <div class="lat">terra incognita, common variety</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="method" id="method">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">THE NOOKSEED METHOD</span>
+      <h2>Less scrolling. More trying.</h2>
+      <p>Three small moves turn an idle "maybe someday" into a Tuesday evening plan.</p>
+    </div>
+    <div class="method-list">
+      <div class="method-item">
+        <span class="num">01</span>
+        <h3>Name the pull</h3>
+        <p>Start with the things you keep noticing — a shop window, a friend's hobby, a feeling you want more of.</p>
+      </div>
+      <div class="method-item">
+        <span class="num">02</span>
+        <h3>Make it realistic</h3>
+        <p>Time, money, and place shape a better fit than inspiration alone ever will.</p>
+      </div>
+      <div class="method-item">
+        <span class="num">03</span>
+        <h3>Take one step</h3>
+        <p>Leave with three small ways to begin — not a syllabus, not a shopping list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz-teaser">
+  <div class="wrap">
+    <div class="detour">
+      <div class="detour-left">
+        <span class="label">A TWO-MINUTE DETOUR</span>
+        <h3>Let curiosity pick the path.</h3>
+        <p>A few honest answers are enough. We'll turn them into three hobbies that fit your actual life — not an imaginary free Tuesday.</p>
+      </div>
+      <div class="detour-right">
+        <span class="label" style="color:var(--moss); margin-bottom:14px; display:block;">BUILD YOUR LITTLE BRIEF</span>
+        <p>Tell us what you're drawn to, then we'll do the connecting of dots. Five short questions, three possible hobbies, zero pressure to pick one tonight.</p>
+        <button class="btn-primary" onclick="startQuiz()">Build my little brief</button>
+        <div class="detour-note">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.1"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.1"/></svg>
+          Your answers stay ephemeral. No account, no pressure.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUIZ ===================== -->
+<section id="quiz">
+  <div class="wrap">
+    <div class="quiz-frame">
+      <div class="quiz-head">
+        <span class="label">YOUR LITTLE BRIEF</span>
+        <div class="quiz-progress" id="progressDots"></div>
+        <button class="quiz-close" onclick="closeQuiz()">CLOSE ✕</button>
+      </div>
+
+      <div class="quiz-body">
+
+        <div class="step active" data-step="1">
+          <span class="label">01 / 05 — THE PULL</span>
+          <h3>What are you curious about?</h3>
+          <p class="helper">Plants, drawing, being outdoors, making things… loose threads are welcome — we'll find the pattern.</p>
+          <textarea id="q1" rows="3" placeholder="e.g. working with my hands, being near water, learning an instrument I gave up as a kid…"></textarea>
+        </div>
+
+        <div class="step" data-step="2">
+          <span class="label">02 / 05 — THE TIME</span>
+          <h3>What time do you have?</h3>
+          <p class="helper">Pick what feels closest to a normal week for you.</p>
+          <div class="choice-grid" id="q2-grid">
+            <button class="choice" data-value="short">Under 30 minutes <small>Bite-sized, easy to repeat</small></button>
+            <button class="choice" data-value="medium">30–90 minutes <small>A proper sit-down session</small></button>
+            <button class="choice" data-value="long">A few hours <small>Room to really get lost in it</small></button>
+          </div>
+        </div>
+
+        <div class="step" data-step="3">
+          <span class="label">03 / 05 — THE POCKET</span>
+          <h3>What feels comfortable to spend?</h3>
+          <p class="helper">Rough starting budget, not a lifetime commitment.</p>
+          <div class="choice-grid" id="q3-grid">
+            <button class="choice" data-value="free">Free to start</button>
+            <button class="choice" data-value="low">Under $25</button>
+            <button class="choice" data-value="mid">$25–$100</button>
+            <button class="choice" data-value="high">$100+, I'm ready to invest</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="4">
+          <span class="label">04 / 05 — THE PLACE</span>
+          <h3>Where will you explore?</h3>
+          <p class="helper">A city, neighborhood, or region. We'll use this for the shape of your options, not a live search.</p>
+          <input type="text" id="q4" placeholder="e.g. Portland, a small town, somewhere with real winters…">
+        </div>
+
+        <div class="step" data-step="5">
+          <span class="label">05 / 05 — THE COMPANY</span>
+          <h3>How would you like to spend the time?</h3>
+          <div class="choice-grid" id="q5-grid">
+            <button class="choice" data-value="solo">Mostly solo <small>Quiet time, your own pace</small></button>
+            <button class="choice" data-value="small">A small group <small>A few friendly regulars</small></button>
+            <button class="choice" data-value="lively">A lively community <small>Classes, clubs, and meetups</small></button>
+            <button class="choice" data-value="open">I'm open <small>The right fit matters most</small></button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="quiz-foot">
+        <button class="btn-ghost" id="backBtn" onclick="prevStep()">Back</button>
+        <button class="btn-primary small" id="nextBtn" onclick="nextStep()">Continue</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RESULTS ===================== -->
+<section id="results">
+  <div class="wrap">
+    <div class="results-head">
+      <span class="label">FIVE SIGNALS. THREE POSSIBILITIES.</span>
+      <h2>Your three possibilities</h2>
+    </div>
+    <div class="results-brief" id="briefSummary"></div>
+
+    <div class="unlock-panel" id="unlockPanel">
+      <div class="unlock-text">
+        <span class="label" style="color:var(--moss);">FIND THEM NEARBY</span>
+        <h3>See real classes, studios, and groups near you — $9</h3>
+        <p>One-time unlock. We'll search near <span id="unlockPlace">your area</span> for each of your three matches — real places, not a guess.</p>
+      </div>
+      <button class="btn-primary" id="unlockBtn" onclick="unlockLocalMatches()">Unlock local matches — $9</button>
+    </div>
+
+    <div class="cards" id="resultCards"></div>
+    <div class="results-actions">
+      <button class="btn-primary" onclick="restartQuiz()">Find another three</button>
+      <button class="link-btn" onclick="goHome()">Back to Nookseed</button>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <a href="#top" class="wordmark">Nookseed</a>
+    <span class="fine">Creative hobby ideas — starter plan. No account required.</span>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------
+   HOBBY LIBRARY
+   Each hobby is tagged for matching against the five signals.
+--------------------------------------------------------- */
+const HOBBIES = [
+  { name:"Windowsill Propagation", lat:"Herbarium fenestra", tags:["plants","nature","green","garden","outdoors","calm","water"],
+    time:["short","medium"], budget:["free","low"], company:["solo","open"], search:"plant nursery",
+    desc:"Turn cuttings from a friend's plant — or your own — into a small rooted collection on a sunny sill.",
+    steps:["Take three cuttings from a pothos or spider plant","Set them in labeled jars of water on your brightest windowsill","Check roots weekly and pot up once they're an inch long"] },
+
+  { name:"Contour Line Drawing", lat:"Grafis continua", tags:["drawing","art","making","quiet","creative","sketch"],
+    time:["short","medium"], budget:["free","low"], company:["solo","open"], search:"art supply store",
+    desc:"One continuous line, no lifting the pen. A fast way back into drawing without the pressure of getting it right.",
+    steps:["Buy a $6 sketchbook and any pen you like","Set a 5-minute timer and draw an object without looking at the page","Repeat daily for a week and flip back to see the shift"] },
+
+  { name:"Neighborhood Foraging Walks", lat:"Ambulatio quaerens", tags:["outdoors","nature","walking","plants","exploring","curious","food"],
+    time:["short","medium","long"], budget:["free"], company:["solo","small","open"], search:"foraging walk group",
+    desc:"Learn to spot the edible and useful plants already growing within a mile of your door.",
+    steps:["Download a regional plant ID app before you head out","Walk a familiar route slowly, noticing anything unfamiliar","Join a local foraging walk to confirm your first three finds"] },
+
+  { name:"Mending & Visible Repair", lat:"Textilis renovatio", tags:["making","hands","sewing","craft","quiet","sustainable"],
+    time:["short","medium"], budget:["free","low"], company:["solo","small"], search:"fabric and sewing store",
+    desc:"Patch, darn, and stitch old clothes back to life — with the repairs left proudly visible.",
+    steps:["Pull one worn item from your closet you'd normally toss","Learn a single stitch from a 10-minute video","Mend one small hole before moving to anything bigger"] },
+
+  { name:"Community Pottery Wheel Night", lat:"Figulina hebdomas", tags:["making","hands","clay","community","class","creative"],
+    time:["medium","long"], budget:["mid","high"], company:["small","lively"], search:"pottery studio classes",
+    desc:"A weekly studio session where the wheel does half the teaching for you.",
+    steps:["Search for a local studio's drop-in or beginner wheel class","Book a single trial session before committing to a course","Bring a towel — you will get clay everywhere"] },
+
+  { name:"Slow Sourdough", lat:"Fermentum domesticum", tags:["cooking","food","making","home","hands","science"],
+    time:["short","medium","long"], budget:["free","low"], company:["solo","open"], search:"baking class",
+    desc:"Keep a living starter and let a five-minute daily ritual turn into a weekend loaf.",
+    steps:["Mix equal parts flour and water in a jar and feed it daily","Discard half and refeed for five days until it doubles reliably","Bake your first loaf using any beginner sourdough recipe online"] },
+
+  { name:"Field Sketching Birds", lat:"Aviarium notatum", tags:["outdoors","nature","drawing","art","birds","quiet","walking"],
+    time:["medium","long"], budget:["free","low"], company:["solo","small"], search:"nature reserve or birding trail",
+    desc:"Pair a small sketchbook with a local park bench and see how patience sharpens your drawing.",
+    steps:["Bring a pencil and small notebook to a nearby green space","Sketch shapes and poses, not perfect detail, for 20 minutes","Note date, weather, and species guesses under each sketch"] },
+
+  { name:"Pickup Board Game Nights", lat:"Ludus communis", tags:["community","social","games","lively","group","fun"],
+    time:["medium","long"], budget:["free","low"], company:["small","lively"], search:"board game cafe",
+    desc:"Regular tables at a local game café or library turn strangers into a standing Thursday crew.",
+    steps:["Search '[your city] board game meetup' for a weekly group","Show up early once to learn the room before committing","Bring one easy game you already know to teach others"] },
+
+  { name:"Urban Sketch Walks", lat:"Peregrinatio graphica", tags:["drawing","art","outdoors","walking","community","exploring"],
+    time:["medium","long"], budget:["free","low"], company:["small","lively"], search:"art studio or gallery",
+    desc:"A roaming group that stops every twenty minutes to sketch whatever's in front of them.",
+    steps:["Search 'urban sketchers [your city]' for the local chapter","Bring any pen and a $5 notebook to your first walk","Sit near — not with — the group until you find your pace"] },
+
+  { name:"Balcony Container Vegetables", lat:"Hortus suspensus", tags:["plants","garden","outdoors","green","food","hands"],
+    time:["short","medium"], budget:["low","mid"], company:["solo","open"], search:"garden center",
+    desc:"A handful of pots, real soil, and something to actually eat by midsummer.",
+    steps:["Pick two easy starts — cherry tomatoes and herbs — from a local nursery","Set pots where you get at least five hours of sun","Water every other morning and check for pests weekly"] },
+
+  { name:"Social Run Club", lat:"Cursus hebdomadalis", tags:["outdoors","fitness","community","lively","group","running"],
+    time:["short","medium"], budget:["free","low"], company:["small","lively"], search:"run club",
+    desc:"A standing weekday jog with a route, a pace group, and coffee after.",
+    steps:["Search for a free local run club — most welcome walkers too","Show up for the slowest pace group first, no shame in it","Stay for the coffee afterward; that's half the point"] },
+
+  { name:"Tabletop Miniature Painting", lat:"Pictura minima", tags:["making","hands","art","quiet","games","creative"],
+    time:["short","medium"], budget:["low","mid"], company:["solo","small"], search:"hobby and game store",
+    desc:"Tiny brushes, tiny figures, and a genuinely meditative kind of focus.",
+    steps:["Buy a $15 starter kit with primed minis and basic paints","Watch one 10-minute beginner technique video","Finish one mini before buying any more supplies"] },
+
+  { name:"Language Exchange Meetups", lat:"Colloquium mutuum", tags:["community","social","lively","language","learning","group"],
+    time:["medium","long"], budget:["free"], company:["small","lively"], search:"language exchange meetup",
+    desc:"Trade twenty minutes of your language for twenty of theirs, over coffee.",
+    steps:["Search for a language exchange meetup in your city","Pick one language and commit to three sessions before judging fit","Bring a notebook for words you want to remember"] },
+
+  { name:"Home Fermentation", lat:"Vasculum vivum", tags:["cooking","food","making","home","science","hands"],
+    time:["short","medium"], budget:["free","low"], company:["solo","open"], search:"kitchen supply store",
+    desc:"Cabbage, salt, and a jar — the simplest possible entry into fermenting your own food.",
+    steps:["Shred one small cabbage and salt it until it releases liquid","Pack it tightly in a jar, submerged, and cover loosely","Taste daily after day three until it's sour the way you like"] },
+
+  { name:"Thrifted Furniture Refinishing", lat:"Lignum renatum", tags:["making","hands","craft","home","creative","outdoors"],
+    time:["long"], budget:["low","mid"], company:["solo","open"], search:"thrift store or salvage yard",
+    desc:"Rescue one tired chair or table at a time and give it a new finish.",
+    steps:["Find one small, solid-wood piece secondhand for under $30","Sand it back with 120-grit paper in a ventilated space","Apply one coat of oil or wax and live with it before adding more"] },
+
+  { name:"Quiet Life Drawing Sessions", lat:"Figura sedata", tags:["drawing","art","quiet","community","creative"],
+    time:["medium","long"], budget:["low","mid"], company:["small","lively"], search:"life drawing studio",
+    desc:"Untutored figure-drawing sessions where a model poses and everyone just draws.",
+    steps:["Search 'life drawing drop-in [your city]'","Bring any paper and a soft pencil or charcoal stick","Sit near the back for your first session and just watch the poses"] },
+
+  { name:"Backyard Astronomy", lat:"Caelum vicinum", tags:["outdoors","nature","quiet","science","night","curious"],
+    time:["short","medium"], budget:["free","low"], company:["solo","small"], search:"astronomy club",
+    desc:"No telescope required to start — just a star map app and a dark corner of your yard.",
+    steps:["Download a free star-map app for your phone","Pick one clear night and identify three constellations","Join a local astronomy club's next public viewing night"] },
+
+  { name:"Amateur Radio Basics", lat:"Vox aetheria", tags:["making","science","learning","hands","curious","community"],
+    time:["medium","long"], budget:["low","mid"], company:["solo","small"], search:"amateur radio club",
+    desc:"A hobby built on quietly reaching strangers across surprising distances.",
+    steps:["Look up your country's entry-level license requirements","Borrow or rent a basic handheld radio before buying one","Find your area's local ham radio club net night"] },
+
+  { name:"Neighborhood Volunteer Gardening", lat:"Hortus communis", tags:["plants","garden","community","outdoors","lively","green"],
+    time:["medium","long"], budget:["free"], company:["small","lively"], search:"community garden",
+    desc:"Community garden plots always need hands, and most will teach you as you go.",
+    steps:["Search for a community garden accepting volunteers nearby","Show up on their regular work day, gloves are usually provided","Ask a longtime volunteer one question about what they're growing"] },
+
+  { name:"Modular Synth Tinkering", lat:"Sonus electricus", tags:["making","music","hands","creative","quiet","science"],
+    time:["medium","long"], budget:["mid","high"], company:["solo","open"], search:"music instrument store",
+    desc:"Patch cables and knobs instead of sheet music — sound as a hands-on material.",
+    steps:["Try a free synth app before buying any hardware","Watch one beginner patching tutorial start to finish","Join an online modular forum to ask your first dumb question"] },
+];
+
+/* ---------------------------------------------------------
+   STATE + NAV
+--------------------------------------------------------- */
+let currentStep = 1;
+const TOTAL_STEPS = 5;
+const answers = { q1:"", q2:null, q3:null, q4:"", q5:null };
+
+function scrollToId(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function startQuiz(){
+  document.getElementById('quiz').classList.add('active');
+  document.getElementById('results').classList.remove('active');
+  currentStep = 1;
+  renderStep();
+  buildDots();
+  setTimeout(()=>scrollToId('quiz'), 50);
+}
+
+function closeQuiz(){
+  document.getElementById('quiz').classList.remove('active');
+}
+
+function goHome(){
+  document.getElementById('results').classList.remove('active');
+  document.getElementById('quiz').classList.remove('active');
+  scrollToId('top');
+}
+
+function restartQuiz(){
+  answers.q1=""; answers.q2=null; answers.q3=null; answers.q4=""; answers.q5=null;
+  document.getElementById('q1').value="";
+  document.getElementById('q4').value="";
+  document.querySelectorAll('.choice.selected').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('results').classList.remove('active');
+  startQuiz();
+}
+
+function buildDots(){
+  const wrap = document.getElementById('progressDots');
+  wrap.innerHTML = "";
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const d = document.createElement('span');
+    d.className = 'dot' + (i<=currentStep ? ' on' : '');
+    wrap.appendChild(d);
+  }
+}
+
+function renderStep(){
+  document.querySelectorAll('.step').forEach(s=>{
+    s.classList.toggle('active', Number(s.dataset.step)===currentStep);
+  });
+  document.getElementById('backBtn').disabled = currentStep===1;
+  document.getElementById('nextBtn').textContent = currentStep===TOTAL_STEPS ? "Find my three" : "Continue";
+  buildDots();
+}
+
+function prevStep(){
+  if(currentStep>1){ currentStep--; renderStep(); }
+}
+
+function nextStep(){
+  // capture current step's value
+  if(currentStep===1) answers.q1 = document.getElementById('q1').value.trim();
+  if(currentStep===4) answers.q4 = document.getElementById('q4').value.trim();
+
+  if(currentStep===TOTAL_STEPS){
+    computeResults();
+    return;
+  }
+  currentStep++;
+  renderStep();
+}
+
+/* choice-grid click handling */
+document.querySelectorAll('.choice-grid').forEach(grid=>{
+  grid.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.choice');
+    if(!btn) return;
+    grid.querySelectorAll('.choice').forEach(c=>c.classList.remove('selected'));
+    btn.classList.add('selected');
+    const stepEl = grid.closest('.step');
+    const qNum = stepEl.dataset.step;
+    answers['q'+qNum] = btn.dataset.value;
+  });
+});
+
+/* ---------------------------------------------------------
+   MATCHING
+--------------------------------------------------------- */
+function tokenize(text){
+  return (text.toLowerCase().match(/[a-z']+/g) || []).filter(w=>w.length>2);
+}
+
+function scoreHobby(h, tokens, time, budget, company){
+  let score = 0;
+  tokens.forEach(t=>{
+    if(h.tags.some(tag => tag.includes(t) || t.includes(tag))) score += 3;
+  });
+  if(time && h.time.includes(time)) score += 2;
+  if(budget && h.budget.includes(budget)) score += 2;
+  if(company){
+    if(company==='open') score += 1;
+    else if(h.company.includes(company)) score += 2;
+  }
+  return score;
+}
+
+function computeResults(){
+  const tokens = tokenize(answers.q1);
+  const scored = HOBBIES.map(h => ({ h, s: scoreHobby(h, tokens, answers.q2, answers.q3, answers.q5) }));
+  scored.sort((a,b)=> b.s - a.s);
+
+  // pick top 3 with a little variety (avoid picking hobbies that are near-duplicate tag sets)
+  const picked = [];
+  for(const item of scored){
+    if(picked.length>=3) break;
+    const overlapsTooMuch = picked.some(p => {
+      const shared = p.h.tags.filter(t=>item.h.tags.includes(t)).length;
+      return shared >= Math.min(p.h.tags.length, item.h.tags.length) - 1 && shared>3;
+    });
+    if(!overlapsTooMuch) picked.push(item);
+  }
+  while(picked.length<3 && picked.length<scored.length){
+    const next = scored.find(s=>!picked.includes(s));
+    if(next) picked.push(next); else break;
+  }
+
+  renderResults(picked.map(p=>p.h));
+}
+
+const TIME_LABEL = { short:"under 30 minutes", medium:"30–90 minutes", long:"a few hours" };
+const BUDGET_LABEL = { free:"free to start", low:"under $25", mid:"$25–$100", high:"$100+" };
+const COMPANY_LABEL = { solo:"mostly solo", small:"a small group", lively:"a lively community", open:"open to anything" };
+
+let currentPicks = [];
+let isUnlocked = false;
+
+function renderResults(picks, skipScroll){
+  currentPicks = picks;
+  document.getElementById('quiz').classList.remove('active');
+  document.getElementById('results').classList.add('active');
+
+  const place = answers.q4 ? answers.q4 : "wherever you are";
+  const brief = document.getElementById('briefSummary');
+  brief.innerHTML = `Looking for something around <b>${TIME_LABEL[answers.q2]||'flexible time'}</b>,
+    <b>${BUDGET_LABEL[answers.q3]||'any budget'}</b>, near <b>${escapeHtml(place)}</b>,
+    spent <b>${COMPANY_LABEL[answers.q5]||'however feels right'}</b>
+    ${answers.q1 ? ` — drawn to <b>${escapeHtml(answers.q1)}</b>.` : "."}`;
+
+  document.getElementById('unlockPlace').textContent = answers.q4 ? answers.q4 : "your area";
+
+  const container = document.getElementById('resultCards');
+  container.innerHTML = "";
+  picks.forEach((h, i)=>{
+    const card = document.createElement('div');
+    card.className = 'seedcard reveal';
+    card.style.animationDelay = (i*0.08)+'s';
+    card.innerHTML = `
+      <div class="seedcard-top">
+        <span class="idx">SPECIMEN 0${i+1}</span>
+        <h3>${h.name}</h3>
+        <div class="lat">${h.lat}</div>
+      </div>
+      <div class="seedcard-body">
+        <p>${h.desc}</p>
+        <div class="tags">
+          <span class="tag">${TIME_LABEL[h.time.includes(answers.q2)?answers.q2:h.time[0]]}</span>
+          <span class="tag">${BUDGET_LABEL[h.budget.includes(answers.q3)?answers.q3:h.budget[0]]}</span>
+        </div>
+        <div class="steps-title">THREE WAYS TO BEGIN</div>
+        <ul class="steps-list">
+          ${h.steps.map(s=>`<li>${s}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="seedcard-foot local-block" id="local-${i}">
+        <div class="local-title">NEAR YOU</div>
+        <div class="local-locked">Unlock local matches above to see real places nearby.</div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  refreshUnlockPanel();
+  if(!skipScroll) setTimeout(()=>scrollToId('results'), 50);
+}
+
+function refreshUnlockPanel(){
+  const panel = document.getElementById('unlockPanel');
+  const btn = document.getElementById('unlockBtn');
+  if(isUnlocked){
+    panel.classList.add('unlocked');
+    panel.querySelector('h3').textContent = "Local matches unlocked";
+    panel.querySelector('p').innerHTML = `Real places near <b>${escapeHtml(answers.q4 || 'your area')}</b> are shown on each card below.`;
+    btn.style.display = 'none';
+  } else {
+    panel.classList.remove('unlocked');
+    panel.querySelector('h3').textContent = "See real classes, studios, and groups near you — $9";
+    panel.querySelector('p').innerHTML = `One-time unlock. We'll search near <span id="unlockPlace">${escapeHtml(answers.q4 || 'your area')}</span> for each of your three matches — real places, not a guess.`;
+    btn.style.display = '';
+  }
+}
+
+/* ---------------------------------------------------------
+   PAYMENT: unlock local matches for $9 (one-time, via Stripe Checkout)
+--------------------------------------------------------- */
+async function unlockLocalMatches(){
+  const btn = document.getElementById('unlockBtn');
+  btn.disabled = true;
+  btn.textContent = "Starting checkout…";
+
+  // Save state so we can restore it when Stripe redirects back here.
+  localStorage.setItem('nookseed_answers', JSON.stringify(answers));
+  localStorage.setItem('nookseed_picks', JSON.stringify(currentPicks.map(h=>h.name)));
+
+  try{
+    const res = await fetch('/api/create-checkout-session', { method:'POST' });
+    const data = await res.json();
+    if(data.url){
+      window.location.href = data.url; // off to Stripe Checkout
+    } else {
+      throw new Error(data.error || 'No checkout URL returned');
+    }
+  } catch(err){
+    console.error(err);
+    btn.disabled = false;
+    btn.textContent = "Unlock local matches — $9";
+    alert("Couldn't start checkout. Please try again in a moment.");
+  }
+}
+
+async function fetchLocalMatches(hobby, index){
+  const el = document.getElementById('local-'+index);
+  if(!el) return;
+  el.innerHTML = `<div class="local-title">NEAR YOU</div><div class="local-empty">Searching nearby…</div>`;
+
+  try{
+    const url = `/api/local-matches?query=${encodeURIComponent(hobby.search)}&location=${encodeURIComponent(answers.q4 || '')}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const places = data.places || [];
+    if(places.length===0){
+      el.innerHTML = `<div class="local-title">NEAR YOU</div><div class="local-empty">No local matches found — try a nearby city or the general area instead.</div>`;
+      return;
+    }
+    el.innerHTML = `<div class="local-title">NEAR YOU</div>` + places.slice(0,3).map(p=>`
+      <a class="local-place" href="${p.mapsUrl || '#'}" target="_blank" rel="noopener">
+        <span class="pname">${escapeHtml(p.name)}</span>
+        <span class="paddr">${escapeHtml(p.address)}${p.rating ? ` · <span class="prating">★ ${p.rating}</span>` : ''}</span>
+      </a>
+    `).join('');
+  } catch(err){
+    console.error(err);
+    el.innerHTML = `<div class="local-title">NEAR YOU</div><div class="local-empty">Couldn't load local matches right now.</div>`;
+  }
+}
+
+async function unlockAndLoadLocal(){
+  isUnlocked = true;
+  refreshUnlockPanel();
+  currentPicks.forEach((h, i)=> fetchLocalMatches(h, i));
+}
+
+/* On load: if we're returning from Stripe with a session_id, verify payment
+   and restore the quiz results before showing local matches. */
+async function checkForReturningPayment(){
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+  if(!sessionId) return;
+
+  try{
+    const res = await fetch(`/api/verify-payment?session_id=${encodeURIComponent(sessionId)}`);
+    const data = await res.json();
+    if(!data.paid) return;
+
+    const savedAnswers = JSON.parse(localStorage.getItem('nookseed_answers') || 'null');
+    const savedPickNames = JSON.parse(localStorage.getItem('nookseed_picks') || 'null');
+    if(!savedAnswers || !savedPickNames) return;
+
+    Object.assign(answers, savedAnswers);
+    const restoredPicks = savedPickNames
+      .map(name => HOBBIES.find(h=>h.name===name))
+      .filter(Boolean);
+    if(restoredPicks.length===0) return;
+
+    renderResults(restoredPicks, true);
+    await unlockAndLoadLocal();
+    setTimeout(()=>scrollToId('results'), 50);
+  } catch(err){
+    console.error('Payment check failed:', err);
+  }
+}
+
+checkForReturningPayment();
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+
+</body>
+</html>
